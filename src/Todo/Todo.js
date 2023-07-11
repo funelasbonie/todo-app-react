@@ -1,10 +1,10 @@
-import { directive } from "@babel/types";
 import React from "react";
 
 export default class Todo extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+    
+    // constructor(props) {
+    //     super(props)
+    // }
 
     render() {
         const { userInfo } = this.props

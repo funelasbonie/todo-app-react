@@ -7,7 +7,8 @@ export default class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            signedIn: false
+            signedIn: false,
+            error: ''
         };
     }
 
@@ -16,26 +17,51 @@ export default class Login extends React.Component {
         this.setState({ [name]: value });
     };
 
-    handleFormSubmit = (event) => {
+    handleRegister = (event) => {
         event.preventDefault();
         const { username, password } = this.state;
-
+        
         if (username !== '' && password !== '') {
+            const user = { username, password };
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const existingUser = users.find((u) => u.username === username);
+            if (existingUser) {
+                this.setState({ error: 'Username already exists.' });
+                return;
+            }
+            
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+
             this.setState({ signedIn: true });
         }
     };
 
+    handleLogin = (event) => {
+        event.preventDefault();
+        const { username, password } = this.state;
+        
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find((u) => u.username === username && u.password === password);
+        if (user) {
+            this.setState({ signedIn: true });
+        } else {
+            this.setState({ error: 'Invalid username or password.' });
+        }
+    };
+
     render() {
-        const { username, password, signedIn } = this.state;
+        const { username, password, signedIn, error } = this.state;
 
         if (signedIn) {
-            return <Todo userInfo={username}/>;
+            return <Todo userInfo={username} />;
         }
 
         return (
             <div>
                 <h2>Login</h2>
-                <form onSubmit={this.handleFormSubmit}>
+                <form>
                     <label>
                         Username:
                         <input type="text" name="username" value={username} onChange={this.handleInputChange} />
@@ -46,8 +72,10 @@ export default class Login extends React.Component {
                         <input type="password" name="password" value={password} onChange={this.handleInputChange} />
                     </label>
                     <br />
-                    <button type="submit">Login</button>
+                    <button type="submit" onClick={this.handleRegister}>Register</button>
+                    <button type="submit" onClick={this.handleLogin}>Login</button>
                 </form>
+                {error && <p>{error}</p>}
             </div>
         );
     }
