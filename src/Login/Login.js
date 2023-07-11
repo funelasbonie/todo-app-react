@@ -1,4 +1,5 @@
 import React from "react";
+import Todo from "../Todo/Todo";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export default class Login extends React.Component {
         const { username, password, signedIn } = this.state;
 
         if (signedIn) {
-            return <h2>Welcome, {username}!</h2>;
+            return <Todo userInfo={username}/>;
         }
 
         return (
