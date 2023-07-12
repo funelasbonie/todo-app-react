@@ -15,7 +15,7 @@ export default class Login extends React.Component {
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
-    };
+    }
 
     handleRegister = (event) => {
         event.preventDefault();
@@ -36,7 +36,7 @@ export default class Login extends React.Component {
 
             this.setState({ signedIn: true });
         }
-    };
+    }
 
     handleLogin = (event) => {
         event.preventDefault();
@@ -49,7 +49,7 @@ export default class Login extends React.Component {
         } else {
             this.setState({ error: 'Invalid username or password.' });
         }
-    };
+    }
 
     render() {
         const { username, password, signedIn, error } = this.state;
@@ -77,6 +77,6 @@ export default class Login extends React.Component {
                 </form>
                 {error && <p>{error}</p>}
             </div>
-        );
+        )
     }
 }
