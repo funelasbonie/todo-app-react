@@ -178,33 +178,33 @@ export default class Todo extends React.Component {
         const { userInfo } = this.props
 
         return (
-            <div class="max-w-md mx-auto bg-gray-200 p-4 rounded-md shadow">
+            <div className="max-w-md mx-auto bg-gray-200 p-4 rounded-md shadow h-full">
                 <span>Welcome {userInfo}!</span>
-                <h1 class="text-2xl font-bold mb-4">To-Do App</h1>
-                <div class="flex mb-4">
+                <h1 className="text-2xl font-bold mb-4">To-Do App</h1>
+                <div className="flex mb-4">
                     <input
                         type="text"
-                        class="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
+                        className="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
                         placeholder="Enter a new task"
                         value={newTodo}
                         onChange={this.handleInputChange}
                     />
                     <button
-                        class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded"
+                        className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded"
                         onClick={this.setTodo}
                     >
                         Add
                     </button>
                 </div>
-                <ul class="space-y-2">
+                <ul className="space-y-2">
                     {todoList.map((todo) => (
-                        <div key={todo.id} class="max-w-md bg-white p-5 mb-1">
+                        <div key={todo.id} className="max-w-md bg-white p-5 mb-1">
                             <div className="flex justify-between">
                                 <div>
                                     {todo.isEditing ? (
                                         <input
                                             type="text"
-                                            class="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
+                                            className="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
                                             value={todo.text}
                                             onChange={(e) => this.handleUpdateInputChange(todo.id, e)}
                                         />
@@ -215,55 +215,53 @@ export default class Todo extends React.Component {
                                 <div className="flex pl-2">
                                     {todo.isEditing ? (
                                         <button
-                                            class="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded mr-2"
+                                            className="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded mr-2"
                                             onClick={() => this.saveUpdatedTodo(todo.id)}
                                         >
                                             Save
                                         </button>
                                     ) : (
                                         <button
-                                            class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded mr-2"
+                                            className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded mr-2"
                                             onClick={() => this.toggleUpdate(todo.id)}
                                         >
                                             Edit
                                         </button>
                                     )}
                                     <button
-                                        class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded mr-2"
+                                        className="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded mr-2"
                                         onClick={() => this.removeTodo(todo.id)}
                                     >
                                         Delete
                                     </button>
                                 </div>
-
                             </div>
-
-                            <div class="mt-4 border-t border-gray-200 border-t-2">
+                            <div className="mt-4 border-t border-gray-200 border-t-2">
                                 <h4 className="p-3">Comments</h4>
                                 <input
                                     type="text"
-                                    class="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
+                                    className="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
                                     placeholder="Enter a comment"
                                     value={commentText}
                                     onChange={this.handleCommentInputChange}
                                 />
                                 <div className="flex justify-end mt-2">
                                     <button
-                                        class="bg-blue-500  hover:bg-blue-600 text-white py-1 px-4 rounded"
+                                        className="bg-blue-500  hover:bg-blue-600 text-white py-1 px-4 rounded"
                                         onClick={() => this.addComment(todo.id)}
                                     >
                                         Add Comment
                                     </button>
                                 </div>
                                 <div className="mt-2">
-                                    <div class="space-y-2">
+                                    <div className="space-y-2">
                                         {todo.comments.map((comment) => (
-                                            <div key={comment.id} class="flex justify-between">
+                                            <div key={comment.id} className="flex justify-between">
                                                 <div>
                                                     {editingCommentId === comment.id ? (
                                                         <input
                                                             type="text"
-                                                            class="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
+                                                            className="w-full mr-2 py-1 px-2 border border-gray-400 rounded"
                                                             value={comment.text}
                                                             onChange={(e) =>
                                                                 this.handleUpdateCommentInputChange(todo.id, comment.id, e)
@@ -276,21 +274,21 @@ export default class Todo extends React.Component {
                                                 <div className="flex pl-2">
                                                     {editingCommentId === comment.id ? (
                                                         <button
-                                                            class="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded mr-2"
+                                                            className="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded mr-2"
                                                             onClick={() => this.saveUpdatedComment(todo.id, comment.id)}
                                                         >
                                                             Save Comment
                                                         </button>
                                                     ) : (
                                                         <button
-                                                            class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded mr-2"
+                                                            className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-4 rounded mr-2"
                                                             onClick={() => this.toggleUpdateComment(comment.id)}
                                                         >
                                                             Edit Comment
                                                         </button>
                                                     )}
                                                     <button
-                                                        class="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded"
+                                                        className="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded"
                                                         onClick={() => this.removeComment(todo.id, comment.id)}
                                                     >
                                                         Delete Comment
